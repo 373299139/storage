@@ -1,4 +1,8 @@
 spring:
+  mvc:
+    view:
+      prefix: classpath:/templates/
+      suffix: .html
   profiles:
     active:
   datasource:
@@ -14,3 +18,6 @@ spring:
     mode: HTML5
     servlet:
       content-type: text/html
+mybatis:
+  typeAliasesPackage: com.example.storage
+  mapperLocations: classpath*:mapping/*.xml

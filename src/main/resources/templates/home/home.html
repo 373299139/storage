@@ -1,13 +1,22 @@
-<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="../../static/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <script src="../../static/jquery-3.4.1.min.js"></script>
+    <script src="../../static/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
 </head>
 <body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <button type="button" class="btn btn-default">按钮</button>
+        </div>
+    </div>
+</div>
 主页
 <div >
-    尊敬的<span class="hidden-sm hidden-xs" th:text="${session.user.userName}"> </span>
+    尊敬的<span class="hidden-sm hidden-xs" th:text="${session.user.username}"> </span>
 </div>
 <div class="col-md-5">
     <div class="panel panel-primary">
@@ -18,10 +27,10 @@
             <ul class="list-group">
                 <li class="list-group-item" th:each="user:${users}">
                     编号：<span th:text="${user.id}"></span><br/>
-                    用户名：<span th:text="${user.userName}"></span><br/>
-                    密码：<span th:text="${user.userPsw}"></span><br/>
-                    电话：<span th:text="${user.userPhone}"></span><br/>
-                    权限：<span th:text="${user.Popedom==0?'管理员':'普通用户'}"></span><br/>
+                    用户名：<span th:text="${user.username}"></span><br/>
+                    密码：<span th:text="${user.userpsw}"></span><br/>
+                    电话：<span th:text="${user.userphone}"></span><br/>
+                    权限：<span th:text="${user.popedom==0?'管理员':'普通用户'}"></span><br/>
                 </li>
             </ul>
         </div>
