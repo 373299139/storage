@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.storage.login.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.example.storage.login.entityBean.User" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="userPsw" property="userpsw" jdbcType="VARCHAR" />
+    <result column="userPhone" property="userphone" jdbcType="INTEGER" />
+    <result column="Popedom" property="popedom" jdbcType="INTEGER" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="upTime" property="uptime" jdbcType="TIMESTAMP" />
+    <result column="upUser" property="upuser" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userName, userPsw, userPhone, Popedom, createTime, upTime, upUser
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from u_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from u_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.storage.login.entityBean.User" >
+    insert into u_user (id, userName, userPsw, 
+      userPhone, Popedom, createTime, 
+      upTime, upUser)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{userpsw,jdbcType=VARCHAR}, 
+      #{userphone,jdbcType=INTEGER}, #{popedom,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{uptime,jdbcType=TIMESTAMP}, #{upuser,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.storage.login.entityBean.User" >
+    insert into u_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        userName,
+      </if>
+      <if test="userpsw != null" >
+        userPsw,
+      </if>
+      <if test="userphone != null" >
+        userPhone,
+      </if>
+      <if test="popedom != null" >
+        Popedom,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="uptime != null" >
+        upTime,
+      </if>
+      <if test="upuser != null" >
+        upUser,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpsw != null" >
+        #{userpsw,jdbcType=VARCHAR},
+      </if>
+      <if test="userphone != null" >
+        #{userphone,jdbcType=INTEGER},
+      </if>
+      <if test="popedom != null" >
+        #{popedom,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uptime != null" >
+        #{uptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="upuser != null" >
+        #{upuser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.storage.login.entityBean.User" >
+    update u_user
+    <set >
+      <if test="username != null" >
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpsw != null" >
+        userPsw = #{userpsw,jdbcType=VARCHAR},
+      </if>
+      <if test="userphone != null" >
+        userPhone = #{userphone,jdbcType=INTEGER},
+      </if>
+      <if test="popedom != null" >
+        Popedom = #{popedom,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uptime != null" >
+        upTime = #{uptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="upuser != null" >
+        upUser = #{upuser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.storage.login.entityBean.User" >
+    update u_user
+    set userName = #{username,jdbcType=VARCHAR},
+      userPsw = #{userpsw,jdbcType=VARCHAR},
+      userPhone = #{userphone,jdbcType=INTEGER},
+      Popedom = #{popedom,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      upTime = #{uptime,jdbcType=TIMESTAMP},
+      upUser = #{upuser,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
