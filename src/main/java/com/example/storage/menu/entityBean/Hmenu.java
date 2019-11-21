@@ -14,6 +14,10 @@ public class Hmenu {
 
     private Integer hDeleted;
 
+    private String hUrl;
+
+    private String hTarget;
+
     public Integer gethId() {
         return hId;
     }
@@ -52,5 +56,21 @@ public class Hmenu {
 
     public void sethDeleted(Integer hDeleted) {
         this.hDeleted = hDeleted;
+    }
+
+    public String gethUrl() {
+        return hUrl;
+    }
+
+    public void sethUrl(String hUrl) {
+        this.hUrl = hUrl == null ? null : hUrl.trim();
+    }
+
+    public String gethTarget() {
+        return hTarget;
+    }
+
+    public void sethTarget(String hTarget) {
+        this.hTarget = hTarget == null ? null : hTarget.trim();
     }
 }

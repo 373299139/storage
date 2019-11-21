@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>上传库</title>
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.css">
+
+    <!--    -->
+</head>
+<script src="../../jquery-3.4.1.min.js"></script>
+<script src="../../bootstrap/js/bootstrap.js"></script>
+<script src="../../file/fileInput.js"></script>
+<body>
+<div class="container-fluid" align="center">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <form role="form" id="headupload" action="" method="post" enctype="multipart/form-data">
+                <table>
+                    <tr><td>
+                         <div class="form-group input-group">
+                            <label >文件名称</label>
+                            <input type="text" class="form-control" name="fileNmae" id="fileNmae" />
+                         </div></td>
+                    </tr>
+                    <tr><td><div class="form-group input-group">
+                            <label>文件类型</label>
+                            <input type="text" class="form-control" name = "fileType" id="fileType" />
+                    </div></td>
+                     </tr>
+                    <tr><td> <div class="form-group input-group">
+                            <label >File input</label>
+                            <input type="file"  name="file" id="file" />
+<!--                            <p class="help-block">-->
+<!--                                Example block-level help text here.-->
+<!--                            </p>-->
+                         </div></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="checkbox">
+<!--                                <label><input type="checkbox" />Check me out</label>-->
+                            </div> <button type="button" id="subId" class="btn btn-default">Submit</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

@@ -7,9 +7,11 @@
     <result column="h_name" property="hName" jdbcType="VARCHAR" />
     <result column="h_status" property="hStatus" jdbcType="INTEGER" />
     <result column="h_deleted" property="hDeleted" jdbcType="INTEGER" />
+    <result column="h_url" property="hUrl" jdbcType="VARCHAR" />
+    <result column="h_target" property="hTarget" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    h_id, h_pid, h_name, h_status, h_deleted
+    h_id, h_pid, h_name, h_status, h_deleted, h_url, h_target
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -18,21 +20,22 @@
     where h_id = #{hId,jdbcType=INTEGER}
   </select>
   <select id="getMenuAll" resultMap="BaseResultMap"  >
-    select
-   h_id, h_pid, h_name, h_status, h_deleted
-    from h_menu
-    where h_deleted = #{dele}
-  </select>
-
+  select
+  h_id, h_pid, h_name, h_status, h_deleted, h_url, h_target
+  from h_menu
+  where h_deleted = #{dele}
+</select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from h_menu
     where h_id = #{hId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.example.storage.menu.entityBean.Hmenu" >
     insert into h_menu (h_id, h_pid, h_name, 
-      h_status, h_deleted)
+      h_status, h_deleted, h_url, 
+      h_target)
     values (#{hId,jdbcType=INTEGER}, #{hPid,jdbcType=INTEGER}, #{hName,jdbcType=VARCHAR}, 
-      #{hStatus,jdbcType=INTEGER}, #{hDeleted,jdbcType=INTEGER})
+      #{hStatus,jdbcType=INTEGER}, #{hDeleted,jdbcType=INTEGER}, #{hUrl,jdbcType=VARCHAR}, 
+      #{hTarget,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.storage.menu.entityBean.Hmenu" >
     insert into h_menu
@@ -52,6 +55,12 @@
       <if test="hDeleted != null" >
         h_deleted,
       </if>
+      <if test="hUrl != null" >
+        h_url,
+      </if>
+      <if test="hTarget != null" >
+        h_target,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="hId != null" >
@@ -68,6 +77,12 @@
       </if>
       <if test="hDeleted != null" >
         #{hDeleted,jdbcType=INTEGER},
+      </if>
+      <if test="hUrl != null" >
+        #{hUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="hTarget != null" >
+        #{hTarget,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -86,6 +101,12 @@
       <if test="hDeleted != null" >
         h_deleted = #{hDeleted,jdbcType=INTEGER},
       </if>
+      <if test="hUrl != null" >
+        h_url = #{hUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="hTarget != null" >
+        h_target = #{hTarget,jdbcType=VARCHAR},
+      </if>
     </set>
     where h_id = #{hId,jdbcType=INTEGER}
   </update>
@@ -94,7 +115,9 @@
     set h_pid = #{hPid,jdbcType=INTEGER},
       h_name = #{hName,jdbcType=VARCHAR},
       h_status = #{hStatus,jdbcType=INTEGER},
-      h_deleted = #{hDeleted,jdbcType=INTEGER}
+      h_deleted = #{hDeleted,jdbcType=INTEGER},
+      h_url = #{hUrl,jdbcType=VARCHAR},
+      h_target = #{hTarget,jdbcType=VARCHAR}
     where h_id = #{hId,jdbcType=INTEGER}
   </update>
 </mapper>
