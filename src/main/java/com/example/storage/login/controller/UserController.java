@@ -2,15 +2,14 @@ package com.example.storage.login.controller;
 
 import com.example.storage.login.entityBean.User;
 import com.example.storage.login.service.UserService;
-import lombok.Getter;
-import lombok.Setter;
+import com.example.storage.redis.RedisUtil;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import redis.clients.jedis.Jedis;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -27,6 +26,11 @@ public class UserController {
     @RequestMapping("/user_login")
     public String user_login(User users,Model model, HttpServletRequest HttpServletRequest, HttpServletResponse HttpServletResponse){
         log.info("登录人账号"+users.getUsername());
+        RedisUtil redisUtil = new   RedisUtil();;
+        redisUtil.set("name","liu");
+        redisUtil.get("name");
+        redisUtil.set("name","yang");
+        redisUtil.get("name");
 //(
         if(!users.getUsername().equals("")&&!users.getUserpsw().equals("")){
            User uuser = userService.seleUser(users);
