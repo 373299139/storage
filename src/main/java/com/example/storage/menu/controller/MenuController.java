@@ -20,7 +20,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
-@RequestMapping("/menuController")
+@RequestMapping("/rest/menuController")
 @Log4j2
 public class MenuController extends BaseController {
     @Autowired

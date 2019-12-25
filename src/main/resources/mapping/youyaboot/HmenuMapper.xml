@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+* 代码为自动生成 Created by www.magicalcoder.com
+* 软件作者：何栋宇 qq:709876443
+* 如果你改变了此类 read 请将此行删除
+*  欢迎加入官方QQ群:648595928
+-->
+<mapper namespace="com.example.storage.youyaboot.dao.HmenuMapper">
+    <!-- Hmenu -->
+    <resultMap id="resultMap" type="Hmenu">
+        <id column="h_id" property="hid"/>
+        <result column="h_pid" property="hpid" />
+        <result column="h_name" property="hname" />
+        <result column="h_status" property="hstatus" />
+        <result column="h_deleted" property="hdeleted" />
+        <result column="h_url" property="hurl" />
+        <result column="h_target" property="htarget" />
+    </resultMap>
+    <!-- 查询单个实体 -->
+    <select id="getModel" parameterType="hashmap" resultMap="resultMap">
+        select  <choose><when test="NotIgnore_!=null and NotIgnore_"><include refid="selectSqlNotIgnoreModel"/> </when><otherwise><include refid="selectSqlIgnoreModel"/></otherwise></choose>
+        from  <include refid="tableSql"/>  where 1=1 <include refid="whereSqlModel"/> <include refid="orderGroupLimit"/>
+    </select>
+    <!--根据主键 查询单个实体 -->
+    <select id="getModelByPk" parameterType="hashmap" resultMap="resultMap">
+        select  <choose><when test="NotIgnore_!=null and NotIgnore_"><include refid="selectSqlNotIgnoreModel"/> </when><otherwise><include refid="selectSqlIgnoreModel"/></otherwise></choose>
+        from  <include refid="tableSql"/>  <include refid="magicalcoderPkWhereSql"/>
+    </select>
+    <!-- 查询一组实体 -->
+    <select id="getModelList" parameterType="hashmap" resultMap="resultMap">
+        select  <choose><when test="NotIgnore_!=null and NotIgnore_"><include refid="selectSqlNotIgnoreModel"/> </when><otherwise><include refid="selectSqlIgnoreModel"/></otherwise></choose>
+        from  <include refid="tableSql"/>  where 1=1 <include refid="whereSqlModel"/> <include refid="orderGroupLimit"/>
+    </select>
+    <!-- 查询一组实体 in 语句-->
+    <select id="getModelInList" parameterType="hashmap" resultMap="resultMap">
+        select  <choose><when test="NotIgnore_!=null and NotIgnore_"><include refid="selectSqlNotIgnoreModel"/> </when><otherwise><include refid="selectSqlIgnoreModel"/></otherwise></choose>
+        from  <include refid="tableSql"/>  where  `h_id` in
+        <foreach item="id" index="index" collection="idList" open="(" separator="," close=")">#{id}</foreach>
+        <include refid="orderGroupLimit"/>
+    </select>
+    <!-- 查询一组实体的数量 -->
+    <select id="getModelListCount" parameterType="hashmap" resultType="int">
+        select count(1)  from  <include refid="tableSql"/>  where 1=1 <include refid="whereSqlModel"/> <include refid="orderGroupLimit"/>
+    </select>
+    <!-- 插入单个实体 遇到入参null转换成数据库NULL-->
+    <insert id="insertModel" parameterType="Hmenu"  useGeneratedKeys="true" keyProperty="hid" >
+        insert into <include refid="tableSql"/> (<include refid="douFieldSql"/>) values(<include refid="douValueSql"/>)
+    </insert>
+    <!-- 替换单个实体 如果没有则插入 遇到入参null转换成数据库NULL-->
+    <insert id="replaceModel" parameterType="Hmenu"  useGeneratedKeys="true" keyProperty="hid" >
+        replace into <include refid="tableSql"/> (<include refid="douFieldSql"/>) values(<include refid="douValueSql"/>)
+    </insert>
+    <!-- 插入单个实体 遇到入参null转换成数据库默认值-->
+    <insert id="insertModelWithoutNull" parameterType="Hmenu"  useGeneratedKeys="true" keyProperty="hid" >
+        insert into <include refid="tableSql"/> (<include refid="douFieldWithoutNullSql"/>) values(<include refid="douValueWithoutNullSql"/>)
+    </insert>
+    <!-- 替换单个实体 如果没有则插入 遇到入参null转换成数据库默认值-->
+    <insert id="replaceModelWithoutNull" parameterType="Hmenu"  useGeneratedKeys="true" keyProperty="hid" >
+        replace into <include refid="tableSql"/> (<include refid="douFieldWithoutNullSql"/>) values(<include refid="douValueWithoutNullSql"/>)
+    </insert>
+    <!-- 批量插入一组实体 -->
+    <insert id="batchInsertModel" parameterType="java.util.List"   useGeneratedKeys="true" keyProperty="hid" >
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            insert into <include refid="tableSql"/> (<include refid="batchDouFieldSql"/>) values (<include refid="batchDouValueSql"/>)
+        </foreach>
+    </insert>
+    <!-- 批量替换一组实体 -->
+    <insert id="batchReplaceModel" parameterType="java.util.List"  useGeneratedKeys="true" keyProperty="hid" >
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            replace into <include refid="tableSql"/> (<include refid="batchDouFieldSql"/>) values (<include refid="batchDouValueSql"/>)
+        </foreach>
+    </insert>
+    <insert id="batchInsertModelWithoutNull" parameterType="java.util.List"   useGeneratedKeys="true" keyProperty="hid" >
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            insert into <include refid="tableSql"/> (<include refid="batchDouFieldWithoutNullSql"/>) values (<include refid="batchDouValueWithoutNullSql"/>)
+        </foreach>
+    </insert>
+    <insert id="batchReplaceModelWithoutNull" parameterType="java.util.List"  useGeneratedKeys="true" keyProperty="hid" >
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            replace into <include refid="tableSql"/> (<include refid="batchDouFieldWithoutNullSql"/>) values (<include refid="batchDouValueWithoutNullSql"/>)
+        </foreach>
+    </insert>
+
+        <!-- 清空表 操作危险 慎用，暂时注销掉-->
+    <delete id="truncateModel">
+        -- truncate table <include refid="tableSql"/>
+    </delete>
+
+    <!-- 根据主键删除一个实体 magicalCoderPrimaryKeyName 框架封装-->
+    <delete id="deleteModelByPk" parameterType="hashmap">
+        delete from <include refid="tableSql"/> <include refid="magicalcoderPkWhereSql"/>
+    </delete>
+
+    <delete id="deleteModelList" parameterType="hashmap">
+        delete from <include refid="tableSql"/> where 1=1 <include refid="whereSqlModel"/>
+    </delete>
+
+    <!-- 批量删除实体 in 根据主键-->
+    <delete id="deleteModelByIds" parameterType="java.util.Set">
+        delete from <include refid="tableSql"/> where `h_id` in <foreach item="id" index="index" collection="collection" open="(" separator="," close=")">#{id}</foreach>
+    </delete>
+    <!-- 更新一个实体 -->
+    <update id="updateModel" parameterType="Hmenu">
+        update <include refid="tableSql"/> <include refid="updateSetSql"/> <include refid="updatePkWhereSql"/>
+    </update>
+    <!-- 更新一个实体 仅仅当被更新的字段不为空的时候才更新，否则忽略更新-->
+    <update id="updateModelWithoutNull" parameterType="Hmenu">
+        update <include refid="tableSql"/> <include refid="updateSetWithoutNullSql"/> <include refid="updatePkWhereSql"/>
+    </update>
+     <!-- 批量更新实体 传入一组实体，分别根据主键作为查询条件-->
+    <update id="batchUpdateModel" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update <include refid="tableSql"/> <include refid="batchUpdateSetSql"/> <include refid="batchUpdatePkWhereSql"/>
+        </foreach>
+    </update>
+    <update id="batchUpdateModelWithoutNull" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update <include refid="tableSql"/> <include refid="batchUpdateWithoutNullSetSql"/> <include refid="batchUpdatePkWhereSql"/>
+        </foreach>
+    </update>
+    <!-- sql 片段 -->
+   <sql id="selectSqlIgnoreModel">
+        <trim suffixOverrides=",">
+            <if test="hidIgnore_ == null or !hidIgnore_">`h_id`,</if>
+            <if test="hpidIgnore_ == null or !hpidIgnore_">`h_pid`,</if>
+            <if test="hnameIgnore_ == null or !hnameIgnore_">`h_name`,</if>
+            <if test="hstatusIgnore_ == null or !hstatusIgnore_">`h_status`,</if>
+            <if test="hdeletedIgnore_ == null or !hdeletedIgnore_">`h_deleted`,</if>
+            <if test="hurlIgnore_ == null or !hurlIgnore_">`h_url`,</if>
+            <if test="htargetIgnore_ == null or !htargetIgnore_">`h_target`</if>
+        </trim>
+    </sql>
+    <sql id="selectSqlNotIgnoreModel">
+        <trim suffixOverrides=",">
+         <if test="hidNotIgnore_ != null and hidNotIgnore_">`h_id`,</if>
+         <if test="hpidNotIgnore_ != null and hpidNotIgnore_">`h_pid`,</if>
+         <if test="hnameNotIgnore_ != null and hnameNotIgnore_">`h_name`,</if>
+         <if test="hstatusNotIgnore_ != null and hstatusNotIgnore_">`h_status`,</if>
+         <if test="hdeletedNotIgnore_ != null and hdeletedNotIgnore_">`h_deleted`,</if>
+         <if test="hurlNotIgnore_ != null and hurlNotIgnore_">`h_url`,</if>
+         <if test="htargetNotIgnore_ != null and htargetNotIgnore_">`h_target`</if>
+        </trim>
+    </sql>
+    <sql id="douFieldSql">
+        <trim suffixOverrides=",">
+            <if test="hid!=null">`h_id`,</if> `h_pid`,`h_name`,`h_status`,`h_deleted`,`h_url`,`h_target`,
+        </trim>
+    </sql>
+    <sql id="douValueSql">
+        <trim suffixOverrides=",">
+                <choose><when test="hid!=null">#{hid},</when></choose>
+                <choose><when test="hpid!=null">#{hpid},</when><otherwise>NULL,</otherwise></choose>
+                <choose><when test="hname!=null">#{hname},</when><otherwise>NULL,</otherwise></choose>
+                <choose><when test="hstatus!=null">#{hstatus},</when><otherwise>NULL,</otherwise></choose>
+                <choose><when test="hdeleted!=null">#{hdeleted},</when><otherwise>NULL,</otherwise></choose>
+                <choose><when test="hurl!=null">#{hurl},</when><otherwise>NULL,</otherwise></choose>
+                <choose><when test="htarget!=null">#{htarget},</when><otherwise>NULL,</otherwise></choose>
+        </trim>
+    </sql>
+
+    <sql id="douFieldWithoutNullSql">
+        <trim suffixOverrides=",">
+                <if test="hid!=null">`h_id`,</if>
+                <if test="hpid!=null">`h_pid`,</if>
+                <if test="hname!=null">`h_name`,</if>
+                <if test="hstatus!=null">`h_status`,</if>
+                <if test="hdeleted!=null">`h_deleted`,</if>
+                <if test="hurl!=null">`h_url`,</if>
+                <if test="htarget!=null">`h_target`,</if>
+
+        </trim>
+    </sql>
+    <sql id="douValueWithoutNullSql">
+        <trim suffixOverrides=",">
+                <choose><when test="hid!=null">#{hid},</when></choose>
+                <choose><when test="hpid!=null">#{hpid},</when></choose>
+                <choose><when test="hname!=null">#{hname},</when></choose>
+                <choose><when test="hstatus!=null">#{hstatus},</when></choose>
+                <choose><when test="hdeleted!=null">#{hdeleted},</when></choose>
+                <choose><when test="hurl!=null">#{hurl},</when></choose>
+                <choose><when test="htarget!=null">#{htarget},</when></choose>
+        </trim>
+    </sql>
+    <sql id="batchDouFieldSql">
+        <trim suffixOverrides=",">
+                <if test="item.hid!=null">`h_id`,</if> `h_pid`,`h_name`,`h_status`,`h_deleted`,`h_url`,`h_target`,
+        </trim>
+    </sql>
+    <sql id="batchDouValueSql">
+        <trim suffixOverrides=",">
+                <choose><when test="item.hid!=null">#{item.hid},</when></choose>
+                <choose><when test="item.hpid!=null">#{item.hpid},</when><otherwise>NULL,</otherwise></choose>
+                <choose><when test="item.hname!=null">#{item.hname},</when><otherwise>NULL,</otherwise></choose>
+                <choose><when test="item.hstatus!=null">#{item.hstatus},</when><otherwise>NULL,</otherwise></choose>
+                <choose><when test="item.hdeleted!=null">#{item.hdeleted},</when><otherwise>NULL,</otherwise></choose>
+                <choose><when test="item.hurl!=null">#{item.hurl},</when><otherwise>NULL,</otherwise></choose>
+                <choose><when test="item.htarget!=null">#{item.htarget},</when><otherwise>NULL,</otherwise></choose>
+        </trim>
+    </sql>
+    <sql id="batchDouFieldWithoutNullSql">
+        <trim suffixOverrides=",">
+                <if test="item.hid!=null">`h_id`,</if>
+                <if test="item.hpid!=null">`h_pid`,</if>
+                <if test="item.hname!=null">`h_name`,</if>
+                <if test="item.hstatus!=null">`h_status`,</if>
+                <if test="item.hdeleted!=null">`h_deleted`,</if>
+                <if test="item.hurl!=null">`h_url`,</if>
+                <if test="item.htarget!=null">`h_target`,</if>
+
+        </trim>
+    </sql>
+    <sql id="batchDouValueWithoutNullSql">
+        <trim suffixOverrides=",">
+                <choose><when test="item.hid!=null">#{item.hid},</when></choose>
+                <choose><when test="item.hpid!=null">#{item.hpid},</when></choose>
+                <choose><when test="item.hname!=null">#{item.hname},</when></choose>
+                <choose><when test="item.hstatus!=null">#{item.hstatus},</when></choose>
+                <choose><when test="item.hdeleted!=null">#{item.hdeleted},</when></choose>
+                <choose><when test="item.hurl!=null">#{item.hurl},</when></choose>
+                <choose><when test="item.htarget!=null">#{item.htarget},</when></choose>
+        </trim>
+    </sql>
+    <sql id="updateSetSql">
+        <set>
+                    <choose> <when test="hpid!=null">`h_pid`=#{hpid}</when> <otherwise> `h_pid`=NULL</otherwise> </choose>,
+                    <choose> <when test="hname!=null">`h_name`=#{hname}</when> <otherwise> `h_name`=NULL</otherwise> </choose>,
+                    <choose> <when test="hstatus!=null">`h_status`=#{hstatus}</when> <otherwise> `h_status`=NULL</otherwise> </choose>,
+                    <choose> <when test="hdeleted!=null">`h_deleted`=#{hdeleted}</when> <otherwise> `h_deleted`=NULL</otherwise> </choose>,
+                    <choose> <when test="hurl!=null">`h_url`=#{hurl}</when> <otherwise> `h_url`=NULL</otherwise> </choose>,
+                    <choose> <when test="htarget!=null">`h_target`=#{htarget}</when> <otherwise> `h_target`=NULL</otherwise> </choose>,
+        </set>
+    </sql>
+    <sql id="updateSetWithoutNullSql">
+        <set>
+                    <choose><when test="hpid!=null">`h_pid`=#{hpid},</when></choose>
+                    <choose><when test="hname!=null">`h_name`=#{hname},</when></choose>
+                    <choose><when test="hstatus!=null">`h_status`=#{hstatus},</when></choose>
+                    <choose><when test="hdeleted!=null">`h_deleted`=#{hdeleted},</when></choose>
+                    <choose><when test="hurl!=null">`h_url`=#{hurl},</when></choose>
+                    <choose><when test="htarget!=null">`h_target`=#{htarget},</when></choose>
+        </set>
+    </sql>
+    <sql id="magicalcoderPkWhereSql">
+        where 1=1
+            and `h_id` = #{magicalCoderPrimaryKeyName}
+    </sql>
+    <sql id="updatePkWhereSql">
+        where 1=1
+            and `h_id` = #{hid}
+    </sql>
+    <sql id="batchUpdateSetSql">
+        <set>
+                    <choose> <when test="item.hpid!=null">`h_pid`=#{item.hpid}</when> <otherwise> `h_pid`=NULL</otherwise> </choose>,
+                    <choose> <when test="item.hname!=null">`h_name`=#{item.hname}</when> <otherwise> `h_name`=NULL</otherwise> </choose>,
+                    <choose> <when test="item.hstatus!=null">`h_status`=#{item.hstatus}</when> <otherwise> `h_status`=NULL</otherwise> </choose>,
+                    <choose> <when test="item.hdeleted!=null">`h_deleted`=#{item.hdeleted}</when> <otherwise> `h_deleted`=NULL</otherwise> </choose>,
+                    <choose> <when test="item.hurl!=null">`h_url`=#{item.hurl}</when> <otherwise> `h_url`=NULL</otherwise> </choose>,
+                    <choose> <when test="item.htarget!=null">`h_target`=#{item.htarget}</when> <otherwise> `h_target`=NULL</otherwise> </choose>,
+        </set>
+    </sql>
+    <sql id="batchUpdateWithoutNullSetSql">
+        <set>
+                    <choose> <when test="item.hpid!=null">`h_pid`=#{item.hpid},</when></choose>
+                    <choose> <when test="item.hname!=null">`h_name`=#{item.hname},</when></choose>
+                    <choose> <when test="item.hstatus!=null">`h_status`=#{item.hstatus},</when></choose>
+                    <choose> <when test="item.hdeleted!=null">`h_deleted`=#{item.hdeleted},</when></choose>
+                    <choose> <when test="item.hurl!=null">`h_url`=#{item.hurl},</when></choose>
+                    <choose> <when test="item.htarget!=null">`h_target`=#{item.htarget},</when></choose>
+        </set>
+    </sql>
+    <sql id="batchUpdatePkWhereSql">
+        where 1=1
+            and `h_id` = #{item.hid}
+    </sql>
+    <!-- 这里可以加上数据库名称 方便的切换数据库-->
+    <sql id="tableSql">
+        storage.h_menu
+    </sql>
+
+   <sql id="whereSqlModel">
+        <if test="hid!=null "> and `h_id` = #{hid}</if>
+        <if test="hpid!=null "> and `h_pid` = #{hpid}</if>
+        <if test="hname!=null "> and `h_name` = #{hname}</if>
+        <if test="hstatus!=null "> and `h_status` = #{hstatus}</if>
+        <if test="hdeleted!=null "> and `h_deleted` = #{hdeleted}</if>
+        <if test="hurl!=null "> and `h_url` = #{hurl}</if>
+        <if test="htarget!=null "> and `h_target` = #{htarget}</if>
+                <if test="hidFirst!=null "> and `h_id` <![CDATA[=]]>
+                            #{hidFirst}
+                </if>
+        <!--<if test="whereSql!=null"> ${whereSql}</if>-->
+    </sql>
+
+    <sql id="safeGroupBy">
+        <if test="safeGroupBy!=null and safeGroupBy!=''">
+            group by
+            <choose>
+                <when test="safeGroupBy != null and safeGroupBy == 'h_id'">  `h_id` </when>
+                <when test="safeGroupBy != null and safeGroupBy == 'h_pid'">  `h_pid` </when>
+                <when test="safeGroupBy != null and safeGroupBy == 'h_name'">  `h_name` </when>
+                <when test="safeGroupBy != null and safeGroupBy == 'h_status'">  `h_status` </when>
+                <when test="safeGroupBy != null and safeGroupBy == 'h_deleted'">  `h_deleted` </when>
+                <when test="safeGroupBy != null and safeGroupBy == 'h_url'">  `h_url` </when>
+                <when test="safeGroupBy != null and safeGroupBy == 'h_target'">  `h_target` </when>
+            </choose>
+        </if>
+    </sql>
+    <sql id="safeOrderBy">
+        <if test="safeOrderBy!=null and safeOrderBy!=''">
+            <choose>
+                <when test="safeOrderBy != null and safeOrderBy == 'h_id desc'"> order by  `h_id` desc </when>
+                <when test="safeOrderBy != null and safeOrderBy == 'h_id asc'"> order by `h_id` asc </when>
+                <when test="safeOrderBy != null and safeOrderBy == 'h_pid desc'"> order by  `h_pid` desc </when>
+                <when test="safeOrderBy != null and safeOrderBy == 'h_pid asc'"> order by `h_pid` asc </when>
+                <when test="safeOrderBy != null and safeOrderBy == 'h_name desc'"> order by  `h_name` desc </when>
+                <when test="safeOrderBy != null and safeOrderBy == 'h_name asc'"> order by `h_name` asc </when>
+                <when test="safeOrderBy != null and safeOrderBy == 'h_status desc'"> order by  `h_status` desc </when>
+                <when test="safeOrderBy != null and safeOrderBy == 'h_status asc'"> order by `h_status` asc </when>
+                <when test="safeOrderBy != null and safeOrderBy == 'h_deleted desc'"> order by  `h_deleted` desc </when>
+                <when test="safeOrderBy != null and safeOrderBy == 'h_deleted asc'"> order by `h_deleted` asc </when>
+                <when test="safeOrderBy != null and safeOrderBy == 'h_url desc'"> order by  `h_url` desc </when>
+                <when test="safeOrderBy != null and safeOrderBy == 'h_url asc'"> order by `h_url` asc </when>
+                <when test="safeOrderBy != null and safeOrderBy == 'h_target desc'"> order by  `h_target` desc </when>
+                <when test="safeOrderBy != null and safeOrderBy == 'h_target asc'"> order by `h_target` asc </when>
+            </choose>
+        </if>
+    </sql>
+
+    <sql id="orderGroupLimit">
+        <include refid="safeGroupBy"/>
+        <if test="notSafeGroupBy != null and notSafeGroupBy != ''"> group by ${notSafeGroupBy}</if>
+        <include refid="safeOrderBy"/>
+        <if test="notSafeOrderBy != null and notSafeOrderBy != ''"> order by ${notSafeOrderBy}</if>
+        <if test="limit != null"> LIMIT <if test="start != null">#{start},</if>#{limit} </if>
+    </sql>
+
+</mapper>
